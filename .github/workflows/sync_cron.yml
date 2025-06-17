@@ -1,0 +1,13 @@
+name: Trigger Sync Daily
+
+on:
+  schedule:
+    - cron: "30 21 * * *"  # 3:00 AM IST
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Sync API
+        run: |
+          curl -X POST https://klaxon-api.onrender.com/api/trigger-sync
