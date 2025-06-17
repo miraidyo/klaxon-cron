@@ -3,7 +3,7 @@ name: Prevent Render Sleep
 on:
   schedule:
     - cron: "*/13 * * * *"
-
+  workflow_dispatch: 
 jobs:
   ping:
     runs-on: ubuntu-latest
