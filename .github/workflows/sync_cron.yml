@@ -3,7 +3,7 @@ name: Trigger Sync Daily
 on:
   schedule:
     - cron: "30 21 * * *"  # 3:00 AM IST
-  workflow_dispatch:   
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -11,4 +11,11 @@ jobs:
     steps:
       - name: Trigger Sync API
         run: |
-          curl -X POST https://klaxon-api.onrender.com/api/trigger-sync
+          echo "Triggering sync..."
+          response=$(curl -s -o response.txt -w "%{http_code}" -X POST https://klaxon-api.onrender.com/api/trigger-sync)
+          cat response.txt
+          if [ "$response" -ne 200 ]; then
+            echo "❌ Sync failed with HTTP status $response"
+            exit 1
+          fi
+          echo "✅ Sync triggered successfully."
