@@ -3,6 +3,7 @@ name: Trigger Sync Daily
 on:
   schedule:
     - cron: "30 21 * * *"  # 3:00 AM IST
+  workflow_dispatch:   
 
 jobs:
   sync:
